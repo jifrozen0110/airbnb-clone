@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Python39\\python.exe",
+    "python.pythonPath": "/home/jifrozen/.local/share/virtualenvs/airbnb-clone-FSiHv1aa/bin/python",
     "python.linting.flake8Enabled": true,
     "python.linting.pylintEnabled": false,
     "python.linting.enabled":true,
