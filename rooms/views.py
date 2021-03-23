@@ -1,12 +1,26 @@
-from datetime import datetime
+from django.views.generic import ListView, DetailView
 from django.shortcuts import render
 from . import models
 
 
-def all_rooms(request):
-    page = int(request.GET.get("page", 1))
-    page_size = 10
-    limit = page_size * page
-    offset = limit - page_size
-    all_rooms = models.Room.objects.all()[offset:limit]
-    return render(request, "rooms/home.html", context={"rooms": all_rooms})
+class HomeView(ListView):
+    """ HomeVIew Definition """
+
+    model = models.Room
+    paginate_by = 10
+    paginate_orphans = 5
+    ordering = "created"
+    contect_object_name = "rooms"
+
+
+class RoomDetail(DetailView):
+
+    """ RoomDetail Definition """
+
+    model = models.Room
+
+
+def search(request):
+    city = request.GET.get("city")
+    city = str.capitalize(city)
+    return render(request, "rooms/search.html", {"city": city})
