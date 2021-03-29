@@ -1,5 +1,6 @@
 {% extends "base.html" %} {% block page_title %} Log In {%endblock page_title%}
 {% block search-bar %} {% endblock search-bar %} {% block content %} 
+{% include 'partials/social_login.html' %}
 Hello!
 <form method="POST" action"{% url "users:login" %}">
     {% csrf_token %}
