@@ -7,7 +7,7 @@ from users import models as user_models
 
 class AbstractItem(core_models.TimeStampModel):
 
-    """ Abstract Item """
+    """Abstract Item"""
 
     name = models.CharField(max_length=80)
 
@@ -25,14 +25,14 @@ class RoomType(AbstractItem):
 
 
 class Amenity(AbstractItem):
-    """ Amenity Model Definition """
+    """Amenity Model Definition"""
 
     class Meta:
         verbose_name_plural = "Amenities"
 
 
 class Facility(AbstractItem):
-    """ Facility Model Definition """
+    """Facility Model Definition"""
 
     pass
 
@@ -41,14 +41,14 @@ class Facility(AbstractItem):
 
 
 class HouseRule(AbstractItem):
-    """ HouseRule MOdel Definition """
+    """HouseRule MOdel Definition"""
 
     class Meta:
         verbose_name = "House Rule"
 
 
 class Photo(core_models.TimeStampModel):
-    """ Photo Model Deefinition """
+    """Photo Model Deefinition"""
 
     caption = models.CharField(max_length=80)
     file = models.ImageField(upload_to="room_photos")
@@ -60,7 +60,7 @@ class Photo(core_models.TimeStampModel):
 
 class Room(core_models.TimeStampModel):
 
-    """ Room Model Definition """
+    """Room Model Definition"""
 
     name = models.CharField(max_length=140)
     description = models.TextField()
@@ -108,8 +108,11 @@ class Room(core_models.TimeStampModel):
         return 0
 
     def first_photo(self):
-        (photo,) = self.photos.all()[:1]
-        return photo.file.url
+        try:
+            (photo,) = self.photos.all()[:1]
+            return photo.file.url
+        except ValueError:
+            return None
 
     def get_next_four_photos(self):
         photos = self.photos.all()[1:5]
